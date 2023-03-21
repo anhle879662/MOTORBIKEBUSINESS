@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/assets/fonts/fontawesome-free-6.1.1-web/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/base.css">
+    <link rel="stylesheet" href="~/Content/assets/css/styles.css">
+
+</head>
+
+<body>
+    <div class="main"></div>
+        <header class="header">
+            <div class="grid">
+                <!-- navbar one -->
+                <nav class="navbar">
+                    <ul class="navbar-list">
+                        <li class="navbar-item">@Html.ActionLink("Trang chủ", "Index", "Home")</li>
+                        <li class="navbar-item">PHỤ TÙNG</li>
+                        <li class="navbar-item">@Html.ActionLink("Sản phẩm", "ListXe", "Xe")</li>
+                        <li class="navbar-item">DỊCH VỤ</li>
+                        <li class="navbar-item">TIN TỨC</li>
+                        <li class="navbar-item">LIÊN HỆ</li>
+                    </ul>
+                    @if (Session["TaiKhoan"] == null)
+                    {
+                        <ul class="navbar-list">
+                            <li class="navbar-item-DN_DK navbar-item navbar-item-separate">
+                                <i class=" fa-solid fa-user"></i> @Html.ActionLink("đăng nhập", "DangNhap", "NguoiDung")
+                            </li>
+                            <li class="navbar-item-DN_DK navbar-item">
+                                <i class="fa-solid fa-address-card"></i> @Html.ActionLink("Đăng Kí", "DangKy", "NguoiDung")
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-list">
+                            <li class="navbar-item-DN_DK navbar-item">
+                                <i class="fa-solid fa-address-card"></i> @Html.ActionLink("Đăng Xuất", "DangXuat", "NguoiDung")
+                            </li>
+                        </ul>
+                    }
+                </nav>
+                <!-- navbar two -->
+                <div class="navbar-second">
+                    <div class="navbar-logo">
+                        <img class="navbar-logo_img" src="assets/images/logo.png" alt="">
+                    </div>
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @class = "form-inline" }))
+                    {<div class="navbar-search">
+                            <input type="text" class="navbar-search-input" value="@ViewBag.Find" name="name" placeholder="Nhập từ khóa tìm kiếm">
+                            <button class="navbar-search-btn">
+                                <i type="navbar-search-btn-icon fa-solid fa-magnifying-glass" @*class="navbar-search-btn-icon fa-solid fa-magnifying-glass"*@></i>
+                            </button>
+                        </div>}
+
+                    <div class="navbar-favorite">
+                        <i class="navbar-favorite-icon fa-solid fa-heart"></i>
+                        <p class="navbar-favorite-text">Yêu thích</p>
+                    </div>
+
+                    <div class="navbar-cart">
+                        <i class="navbar-cart-icon fa-solid fa-cart-shopping"></i>
+                        <p class="navbar-cart-text">@Html.Partial("~/Views/GioHang/GioHangPartial.cshtml")</p>
+                    </div>
+                    <div class="navbar-help">
+                        <i class="navbar-help-icon fa-solid fa-circle-question"></i>
+                        <p class="navbar--help-text">Hỗ Trợ</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+
+        <div class="container body-content">
+            @RenderBody()
+
+            <footer>
+            </footer>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        @RenderSection("changeImageauto", required: false)
+</body>
+</html>
+@RenderSection("upload", required: false)
+
+
+

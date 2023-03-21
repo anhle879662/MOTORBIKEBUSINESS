@@ -1,0 +1,203 @@
+﻿@model PagedList.IPagedList<shopxemay.Models.Xe>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html lang="en"></html>
+
+<head>
+
+    <link href="~/Content/assets/css/base.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/styles.css" rel="stylesheet" />
+    <link href="~/Content/assets/fonts/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" />
+</head>
+
+<div class="slider">
+    <div class="banner">
+        <img id="img" onclick="changeImg" src="Content/assets/images/Banner11.jpg" alt="">
+        <img id="img" onclick="changeImg" src="Content/assets/images/banner22.jpg" alt="" style="display: none">
+        <img id="img" onclick="changeImg" src="Content/assets/images/banner33.jpg" alt="" style="display: none">
+        <img id="img" onclick="changeImg" src="Content/assets/images/banner44.jpg" alt="" style="display: none">
+        <img id="img" onclick="changeImg" src="Content/assets/images/banner55.jpg" alt="" style="display: none">
+        <img id="img" onclick="changeImg" src="Content/assets/images/banner66.jpg" alt="" style="display: none">
+        <img id="img" onclick="changeImg" src="Content/assets/images/banner77.jpg" alt="" style="display: none">
+    </div>
+
+</div>
+
+
+<div class="grid">
+    <div class="product-main grid-row">
+        <!-- product item -->
+        @foreach (var item in Model)
+        {<div class=" grid-column-4">
+                <div class="home-product">
+                    <img src="@item.hinh" alt="" class="home-product-item-img">
+                    <div class="home-product-item">
+                        <h1 class="home-product-item-name">@item.tenxe</h1>
+                        <h4 class="home-product-item-price">Từ: @String.Format("{0:0,0 VNĐ}", item.giaban) </h4>
+                        <h2 class="home-product-item-detail">
+                            <a class="btn btn-success" href="@Url.Action("ThemGioHang", "GioHang",
+new { @id = item.maxe, @strURL = Request.Url.ToString() })">Đặt mua</a>
+                        </h2>
+                        <div class="home-product-item-action">
+                            <span class="home-product-item-heart home-product-item-heart-click">
+                                <i class="heart-empty fa-regular fa-heart"></i>
+                                <i class="heart-fill fa-solid fa-heart"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>}
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+@section  changeImageauto
+{
+    <script>
+        var index = 1;
+
+        function changeImage() {
+            var imgs = ["Content/assets/images/Banner11.jpg ", "Content/assets/images/banner22.jpg", "Content/assets/images/banner33.jpg", "Content/assets/images/banner44.jpg", "Content/assets/images/banner55.jpg", "Content/assets/images/banner66.jpg", "Content/assets/images/banner77.jpg"];
+            document.getElementById('img').src = imgs[index];
+            index++;
+            if (index == 7) {
+                index = 0;
+            }
+        }
+
+        setInterval(changeImage, 2500);
+    </script>
+
+}
+
+
+
+@*<div>
+        <div>
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+            @Model.PageCount
+        </div>
+        <div class="MenuTrang">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new
+            {
+                page = page
+            }))
+        </div>
+    </div>
+    <style>
+        .MenuTrang li {
+            display: inline;
+        }
+    </style>
+    <style type="text/css">
+        #mau-nut a {
+            clear: both;
+            background-color: orange;
+            color: snow;
+        }
+
+            #mau-nut a:hover {
+                background-color: darkcyan;
+                color: snow;
+            }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var maxLength = 100;
+            $(".show-read-more").each(function () {
+                var myStr = $(this).text();
+                if ($.trim(myStr).length > maxLength) {
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+
+                    $(this).append(' <a href="javascript:void(0);" class="read-
+    more">đọc tiếp...</a>');
+
+    $(this).append('<span class="more-text">' + removedStr +
+                        '</span>');
+                }
+            });
+            $(".read-more").click(function () {
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+            });
+        });
+    </script>
+    <style>
+        .show-read-more .more-text {
+            display: none;
+        }
+    </style>*@
+
+<div>
+    <div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /
+        @Model.PageCount
+    </div>
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new
+        {
+            page = page
+        }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+
+$(this).append('<span class="more-text">' + removedStr +
+                    '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>

@@ -1,0 +1,44 @@
+﻿@model shopxemay.Models.Xe
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Chi Tiết Xe </h2>
+<div>
+    @{
+        ViewBag.Title = "Detail";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <div class="container">
+        <div class="content">
+            <div class="display-label"> <span></span> <img src="@Model.hinh " width="30%" /></div>
+            <div class="display-label"><span></span> @Model.mota</div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Trở về", "ListXe")
+</div>
+
+<style>
+    .container {
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .content {
+        text-align: center;
+    }
+    .content span {
+        width: 150px;
+        @*text-align: right;*@
+    }
+    .display-label {
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 0.2px;
+    }
+</style>
+

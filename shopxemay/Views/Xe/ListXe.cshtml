@@ -1,0 +1,64 @@
+﻿@model  IEnumerable<shopxemay.Models.Xe>
+
+@{
+    ViewBag.Title = "ListXe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Content/assets/css/base.css" rel="stylesheet" />
+<link href="~/Content/assets/fonts/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" />
+<link href="~/Content/assets/css/styles.css" rel="stylesheet" />
+<p>
+    @Html.ActionLink("THÊM XE MỚI", "Create")
+    @Html.ActionLink("XE SỐ", "XeSo")
+    @Html.ActionLink("XE TAY GA", "XeTayGa")
+    @Html.ActionLink("XE CÔN TAY", "XeConTay")
+    @Html.ActionLink("XE MÔ TÔ", "XeMoTo")
+</p>
+<div class="container">
+    <table class="table">
+    <tr>
+        <th> Mã xe</th>
+        <th> Mã loại </th>
+        <th> Tên Xe</th>
+        <th> Hình </th>
+        <th> Giá bán</th>
+        <th> Ngày cập nhật </th>
+        <th> Số lượng tồn</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+    <tr>
+            <td>@Html.DisplayFor(modelItem => item.maxe)</td>
+            <td>@Html.DisplayFor(modelItem => item.maloai)</td>
+            <td>@Html.DisplayFor(modelItem => item.tenxe)</td>
+            <td><img src="@item.hinh " width="80%" alt="hinh thumbnail" /></td>
+            <td>@String.Format("{0:0,0 VNĐ}", item.giaban)</td>
+            <td>@Html.DisplayFor(modelItem => item.ngaycapnhat)</td>
+            <td>@Html.DisplayFor(modelItem => item.soluongton)</td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.maxe }) |
+                @Html.ActionLink("Chi tiết", "Detail", new { id = item.maxe }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.maxe })
+            </td>
+    </tr>
+    }
+</table>
+   </div>
+
+
+<style>
+    .container {
+        width: 1200px;
+        margin: 0 auto;
+    }
+    td {
+        padding: 0 24px;
+        font-size: 16px;
+    }
+    th {
+        font-size: 18px;
+    }
+</style>

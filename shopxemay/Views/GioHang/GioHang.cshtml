@@ -1,0 +1,85 @@
+﻿@model IEnumerable<shopxemay.Models.GioHang>
+@using shopxemay.Models
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/assets/css/base.css" rel="stylesheet" />
+<link href="~/Content/assets/css/styles.css" rel="stylesheet" />
+<link href="~/Content/assets/fonts/fontawesome-free-6.1.1-web/css/all.css" rel="stylesheet" />
+
+<h2>Giỏ Hàng</h2>
+<table class="table">
+    <tr>
+        <th>
+            Mã xe
+        </th>
+        <th>
+            Tên xe
+        </th>
+        <th>
+            Hình
+        </th>
+        <th>
+            Giá
+        </th>
+        <th>
+            Số lượng
+        </th>
+        <th>
+            Thành tiền
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.maxe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenxe)
+            </td>
+            <td> <img src="@item.hinh" width="180" /></td>
+            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @id = item.maxe }))
+            {
+                <td>
+                    @String.Format("{0:0,0}", item.giaban) VND
+                </td>
+                <td>
+                    <input type="number" min="1" max="@item.soluongton" name="txtSoLuong" value="@item.soluong" />
+                </td>
+                <td>
+                    @String.Format("{0:0,0 VNĐ}", item.dthanhtien);
+                </td>
+
+                <td>
+                     @Html.ActionLink("Xoa", "XoaGioHang", new { id = item.maxe })
+                </td>
+                <td><input type="submit" value="Cập nhật" class="btn btn-success" /></td>
+            }
+        </tr>
+    }
+    
+    <tr style="font-weight:bold; text-align:left; color:red">
+        <td colspan="2"> Số loại xe: @ViewBag.TongSoLuongSanPham</td>
+        <td colspan="2"> Số lượng xe: @ViewBag.TongSoLuong</td>
+        <td colspan="4"> Tổng tiền: @String.Format("{0:0,0}", @ViewBag.TongTien) VND</td>
+    </tr>
+    <tr style="font-weight:bold; color:yellow;text-align:right">
+        <td colspan="5">
+            @Html.ActionLink("Xóa Giỏ Hàng", "XoaTatCaGioHang")
+        </td>
+        <td colspan="5">
+            @Html.ActionLink("Đặt hàng", "DatHang", "GioHang")
+        </td>
+    </tr>
+</table>
+
+<style>
+    .navbar-cart-text a{
+        color:#fff;
+    }
+
+</style>
